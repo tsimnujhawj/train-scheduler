@@ -1,3 +1,18 @@
+.container {
+    width: 960px;
+}
+
 .header-box {
     text-align: center;
+    border-radius: 5px;
+}
+
+body {
+    background-image: url("../images/train_2.jpg");
+    background-size: 100% auto;
+}
+
+.content-box {
+    border: 1px solid green;
+    height: 300px;
 }
