@@ -1,18 +1,47 @@
+/* 
+font-family: 'Muli', sans-serif;
+font-family: 'Oxygen', sans-serif;
+font-family: 'Righteous', cursive;
+*/
+
 .container {
     width: 960px;
+    margin: 10px auto;
 }
 
-.header-box {
+.header-box h1 {
+    text-align: center;
+    color: #eef1ef;
+    font-weight: 600;
+    font-family: 'Righteous', cursive;
+    font-size: 90px;
+    border: 1px solid #1c2321;
+    background-color: #5e6572;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.header-box .lead {
     text-align: center;
     border-radius: 5px;
+    color: #eef1ef;
+    font-weight: 400;
+    font-family: 'Muli', sans-serif;
+    border: #5e6572 1px solid;
+    background-color: #7d98a1;
 }
 
 body {
     background-image: url("../images/train_2.jpg");
     background-size: 100% auto;
+    font-family: 'Muli', sans-serif;
 }
 
 .content-box {
-    border: 1px solid green;
-    height: 300px;
+    margin: 10px auto;
+}
+
+form {
+    text-align: center;
+    margin: 0 auto;
 }
