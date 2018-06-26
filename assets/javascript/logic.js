@@ -28,18 +28,17 @@ var config = {
       freq: frequency,
   }
 
+  // Pushes data to Firebase
   database.ref().push(newTrain);
 
-  // Logs everything to console
-  console.log(newTrain.name);
-  console.log(newTrain.dest);
-  console.log(newTrain.first);
-  console.log(newTrain.freq);
-
   // Alert
-  alert("train successfully added");
+  $(".lead").html("The train has been added!")
+  setTimeout(function() {
+    let originalText = "Enter the train name, destination, first time it arrived, and the frequency below to add a train to the table.";
+    $(".lead").html(originalText);
+  }, 5000)
 
-  // Clears all of the text-boxes
+  // Clears the text-boxes
   $("#train-name-input").val("");
   $("#dest-input").val("");
   $("#first-train-input").val("");
@@ -47,8 +46,6 @@ var config = {
 });
 
 database.ref().on("child_added", function(childSnapshot, prevChildKey) {
-
-    console.log(childSnapshot.val());
   
     // Store everything into a variable.
     let trainName = childSnapshot.val().name;
@@ -56,19 +53,31 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     let firstTrainTime = childSnapshot.val().first;
     let frequency = childSnapshot.val().freq;
   
-    // Employee Info
-    console.log(trainName);
-    console.log(destination);
-    console.log(firstTrainTime);
-    console.log(frequency);
+    // Set the time with conversion from military to 12-hour
+    let trainSetTime = moment(firstTrainTime, "kmm").format("hh:mm A");
+
+    // Convert time
+    let firstTimeConverted = moment(trainSetTime, "kmm").subtract(1, "years");
+
+    // Grab time difference between now and first train
+    let diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+
+    // Figure out the time apart
+    let remainTime = diffTime % frequency;
+
+    // Figure out the time away
+    let arrivalTime = frequency - remainTime;
+
+    // Figure out when the next train is
+    let nextTrain = moment().add(arrivalTime, "minutes");
+
+    // Convert the nextTrain time
+    let nextTrainConverted = moment(nextTrain).format("hh:mm A")
+
   
-    // Set the time
-    var trainSetTime = moment(firstTrainTime, "kmm").format("hh:mm A");
-    console.log(trainSetTime);
-  
-    // Add each train's data into the table
+    // Add each train's data into table
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" +
-    frequency + "</td><td>" + trainSetTime + "</td></tr>");
+    frequency + "</td><td>" + nextTrainConverted + "</td><td>" + arrivalTime + "</td></tr>");
   });
 
 }); // DOCUMENT READY CLOSING
