@@ -52,9 +52,9 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   
     // Store everything into a variable.
     let trainName = childSnapshot.val().name;
-    let destination = childSnapshot.val().role;
-    let firstTrainTime = childSnapshot.val().start;
-    let frequency = childSnapshot.val().rate;
+    let destination = childSnapshot.val().dest;
+    let firstTrainTime = childSnapshot.val().first;
+    let frequency = childSnapshot.val().freq;
   
     // Employee Info
     console.log(trainName);
@@ -63,11 +63,12 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     console.log(frequency);
   
     // Set the time
-    var trainSetTime = moment.unix(firstTrainTime).format("hh:mm A");
+    var trainSetTime = moment(firstTrainTime, "hmm").format("HH:mm A");
+    console.log(trainSetTime);
   
     // Add each train's data into the table
-    $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-    empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
+    $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" +
+    frequency + "</td><td>" + firstTrainTime + "</td></tr>");
   });
 
 }); // DOCUMENT READY CLOSING
