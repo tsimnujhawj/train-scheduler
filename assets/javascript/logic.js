@@ -63,12 +63,12 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     console.log(frequency);
   
     // Set the time
-    var trainSetTime = moment(firstTrainTime, "hmm").format("HH:mm A");
+    var trainSetTime = moment(firstTrainTime, "kmm").format("hh:mm A");
     console.log(trainSetTime);
   
     // Add each train's data into the table
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" +
-    frequency + "</td><td>" + firstTrainTime + "</td></tr>");
+    frequency + "</td><td>" + trainSetTime + "</td></tr>");
   });
 
 }); // DOCUMENT READY CLOSING
